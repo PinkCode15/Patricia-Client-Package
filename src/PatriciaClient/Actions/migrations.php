@@ -1,6 +1,6 @@
 <?php
 
-namespace PatriciaClient\Migrations;
+namespace PatriciaClient\Actions;
 
 class Migrations
 {

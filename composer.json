@@ -7,6 +7,10 @@
         {
             "name": "StaceyCreates",
             "email": "stacey@patricia.com.ng"
+        },
+        {
+            "name": "OctaconDeveloper",
+            "email": "jil@patricia.com.ng"
         }
     ],
     "autoload": {
