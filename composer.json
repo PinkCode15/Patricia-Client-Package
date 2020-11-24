@@ -1,0 +1,23 @@
+{
+    "name": "stacey/pat-client-package",
+    "description": "This package enables easy setup for a client structure",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "StaceyCreates",
+            "email": "stacey@patricia.com.ng"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+           "PatriciaClient\\":"src/PatriciaClient/"
+           }
+        },
+    "require": {
+        "vlucas/phpdotenv": "^5.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+}
