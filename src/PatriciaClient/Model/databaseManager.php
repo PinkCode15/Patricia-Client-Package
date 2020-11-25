@@ -69,6 +69,25 @@ class DatabaseManager
         }
     }
 
+     /**
+     * inserts into table if the table  exists
+     * @return String
+     */
+    public function insertIntoTable($tableName, $attribute, $value)
+    {
+        if ($this->checkTable($tableName)) {
+            $statement =  "INSERT INTO " . $tableName . " ( " . $attribute . 
+                            ") VALUES (" . $value . ")";
+            try {
+                $query = $this->pdoConnection->prepare($statement);
+                $query->execute();
+                echo "Inserted into table successfully";
+            } catch (\PDOException $e) {
+                throw new \Exception($e);
+            }
+        }
+    }
+
     /**
      * checks if a table  exists
      * @return boolean
@@ -81,7 +100,7 @@ class DatabaseManager
             $result = $query->execute();
             return $result;
         } catch (\PDOException $e) {
-            throw new \Exception($e);
+            return false;
         }
     }
 
