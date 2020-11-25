@@ -81,7 +81,6 @@ class DatabaseManager
             $result = $query->execute();
             return $result;
         } catch (\PDOException $e) {
-            throw new \Exception($e);
         }
     }
 
