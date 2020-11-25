@@ -45,7 +45,7 @@ class DatabaseManager
                 $query->execute();
                 echo "Table created successfully";
             } catch (\PDOException $e) {
-                echo $e->getMessage();
+                throw new \Exception($e);
             }
         }
     }
@@ -64,7 +64,7 @@ class DatabaseManager
                 $query->execute();
                 echo "Table dropped successfully";
             } catch (\PDOException $e) {
-                echo $e->getMessage();
+                throw new \Exception($e);
             }
         }
     }
@@ -81,7 +81,7 @@ class DatabaseManager
             $result = $query->execute();
             return $result;
         } catch (\PDOException $e) {
-            echo false;
+            throw new \Exception($e);
         }
     }
 
@@ -96,6 +96,7 @@ class DatabaseManager
             $query = $this->pdoConnection->prepare($statement);
             $query->execute();
         } catch (\PDOException $e) {
+            throw new \Exception($e);
         }
     }
 
@@ -110,6 +111,7 @@ class DatabaseManager
             $query = $this->pdoConnection->prepare($statement);
             $query->execute();
         } catch (\PDOException $e) {
+            throw new \Exception($e);
         }
     }
 
