@@ -3,7 +3,8 @@
 namespace PatriciaClient\Model;
 
 use Dotenv\Dotenv;
-use composer\Composer; 
+use composer\Composer;
+
 class DatabaseManager
 {
 
@@ -64,7 +65,6 @@ class DatabaseManager
                 $query->execute();
                 echo "Table dropped successfully";
             } catch (\PDOException $e) {
-                
             }
         }
     }
@@ -79,7 +79,7 @@ class DatabaseManager
         try {
             $query = $this->pdoConnection->prepare($statement);
             $result = $query->execute();
-           return true;
+            return true;
         } catch (\PDOException $e) {
             return false;
         }
@@ -129,5 +129,23 @@ class DatabaseManager
     private function getEnv()
     {
         return file_exists($this->getProjectRoot() . "/.env");
+    }
+
+
+    public function insertIntoTable($tableName, $array)
+    {
+        if ($this->checkTable($tableName)) {
+            $attribute = join(', ', array_keys($array));
+            $value = str_replace(str_split("[]"), "", json_encode(array_values($array)));
+            $statement =  "INSERT INTO " . $tableName . " ( " . $attribute .
+                ") VALUES (" . $value . ")";
+            try {
+                $query = $this->pdoConnection->prepare($statement);
+                $query->execute();
+                echo "Inserted into table successfully";
+            } catch (\PDOException $e) {
+                throw new \Exception($e);
+            }
+        }
     }
 }
