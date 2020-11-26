@@ -3,7 +3,7 @@
 namespace PatriciaClient\Model;
 
 use Dotenv\Dotenv;
-use composer\Composer;
+use Composer\Composer;
 
 class DatabaseManager
 {
