@@ -3,6 +3,12 @@
     "description": "This package enables easy setup for a client structure",
     "type": "library",
     "license": "MIT",
+    "scripts": {
+       "post-install-cmd": [
+            "PatriciaClient\\Actions\\sqlMigration::runMigration"
+        ]
+       
+    },
     "authors": [
         {
             "name": "StaceyCreates",

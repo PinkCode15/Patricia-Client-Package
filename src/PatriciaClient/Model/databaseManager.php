@@ -3,21 +3,22 @@
 namespace PatriciaClient\Model;
 
 use Dotenv\Dotenv;
+use composer\Composer;
 
 class DatabaseManager
 {
 
-    function __construct()
+    public function __construct()
     {
         if ($this->getEnv()) {
             $dotenv = Dotenv::createImmutable($this->getProjectRoot());
             $dotenv->load();
-            $this->dbName = $_ENV['DB_DATABASE'] ?? '';
-            $this->dbUser = $_ENV['DB_USERNAME'] ?? '';
-            $this->dbPassword = $_ENV['DB_PASSWORD'] ?? '';
-            $this->dbHost = $_ENV['DB_HOST'] ?? '';
-            $this->dbPort = $_ENV['DB_PORT'] ?? '';
-            $this->dbConnection = $_ENV['DB_CONNECTION'] ?? '';
+            $this->dbName = $_ENV['DB_DATABASE'] ?? 'JilHQarrys';
+            $this->dbUser = $_ENV['DB_USERNAME'] ?? 'root';
+            $this->dbPassword = $_ENV['DB_PASSWORD'] ?? 'root';
+            $this->dbHost = $_ENV['DB_HOST'] ?? '127.0.0.1';
+            $this->dbPort = $_ENV['DB_PORT'] ?? '3306';
+            $this->dbConnection = $_ENV['DB_CONNECTION'] ?? 'mysql';
             $this->pdoConnection = new \PDO(
                 $this->dbConnection . ":host=" . $this->dbHost,
                 $this->dbUser,
@@ -64,7 +65,6 @@ class DatabaseManager
                 $query->execute();
                 echo "Table dropped successfully";
             } catch (\PDOException $e) {
-                throw new \Exception($e);
             }
         }
     }
@@ -73,11 +73,13 @@ class DatabaseManager
      * inserts into table if the table  exists
      * @return String
      */
-    public function insertIntoTable($tableName, $attribute, $value)
+    public function insertIntoTable($tableName, $array)
     {
         if ($this->checkTable($tableName)) {
-            $statement =  "INSERT INTO " . $tableName . " ( " . $attribute . 
-                            ") VALUES (" . $value . ")";
+            $attribute = join(', ', array_keys($array));
+            $value = str_replace(str_split("[]"), "", json_encode(array_values($array)));
+            $statement =  "INSERT INTO " . $tableName . " ( " . $attribute .
+                ") VALUES (" . $value . ")";
             try {
                 $query = $this->pdoConnection->prepare($statement);
                 $query->execute();
@@ -94,11 +96,11 @@ class DatabaseManager
      */
     private function checkTable($tableName)
     {
-        $statement = "select 1 from " . $tableName;
+        $statement = "select * from " . $tableName;
         try {
             $query = $this->pdoConnection->prepare($statement);
             $result = $query->execute();
-            return $result;
+            return true;
         } catch (\PDOException $e) {
             return false;
         }
@@ -115,7 +117,6 @@ class DatabaseManager
             $query = $this->pdoConnection->prepare($statement);
             $query->execute();
         } catch (\PDOException $e) {
-            throw new \Exception($e);
         }
     }
 
@@ -130,7 +131,6 @@ class DatabaseManager
             $query = $this->pdoConnection->prepare($statement);
             $query->execute();
         } catch (\PDOException $e) {
-            throw new \Exception($e);
         }
     }
 
@@ -140,9 +140,7 @@ class DatabaseManager
      */
     private function getProjectRoot()
     {
-        $reflection = new \ReflectionClass(\Composer\Autoload\ClassLoader::class);
-        $vendorDir = dirname(dirname(dirname($reflection->getFileName())));
-        return $vendorDir;
+        return dirname(\Composer\Factory::getComposerFile());
     }
 
     /**
@@ -153,4 +151,5 @@ class DatabaseManager
     {
         return file_exists($this->getProjectRoot() . "/.env");
     }
+
 }
