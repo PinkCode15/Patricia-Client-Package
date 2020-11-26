@@ -69,6 +69,27 @@ class DatabaseManager
         }
     }
 
+     /**
+     * inserts into table if the table  exists
+     * @return String
+     */
+    public function insertIntoTable($tableName, $array)
+    {
+        if ($this->checkTable($tableName)) {
+            $attribute = join(', ', array_keys($array));
+            $value = str_replace(str_split("[]"), "", json_encode(array_values($array)));
+            $statement =  "INSERT INTO " . $tableName . " ( " . $attribute .
+                ") VALUES (" . $value . ")";
+            try {
+                $query = $this->pdoConnection->prepare($statement);
+                $query->execute();
+                echo "Inserted into table successfully";
+            } catch (\PDOException $e) {
+                throw new \Exception($e);
+            }
+        }
+    }
+
     /**
      * checks if a table  exists
      * @return boolean
@@ -131,21 +152,4 @@ class DatabaseManager
         return file_exists($this->getProjectRoot() . "/.env");
     }
 
-
-    public function insertIntoTable($tableName, $array)
-    {
-        if ($this->checkTable($tableName)) {
-            $attribute = join(', ', array_keys($array));
-            $value = str_replace(str_split("[]"), "", json_encode(array_values($array)));
-            $statement =  "INSERT INTO " . $tableName . " ( " . $attribute .
-                ") VALUES (" . $value . ")";
-            try {
-                $query = $this->pdoConnection->prepare($statement);
-                $query->execute();
-                echo "Inserted into table successfully";
-            } catch (\PDOException $e) {
-                throw new \Exception($e);
-            }
-        }
-    }
 }
