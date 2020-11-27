@@ -73,6 +73,24 @@ class DatabaseManager
      * inserts into table if the table  exists
      * @return String
      */
+    public function selectById(String $tableName, int $id)
+    {
+        if ($this->checkTable($tableName)) {
+            try {
+                $statement =  "SELECT * FROM  " . $tableName ." WHERE id=? LIMIT 1";
+               $query = $this->pdoConnection->prepare($statement);
+                $query->execute([$id]);
+                return $query->fetch(\PDO::FETCH_ASSOC);
+            } catch (\PDOException $e) {
+                throw new \Exception($e);
+            }
+        }
+    }
+
+         /**
+     * inserts into table if the table  exists
+     * @return String
+     */
     public function insertIntoTable($tableName, $array)
     {
         if ($this->checkTable($tableName)) {
@@ -81,9 +99,10 @@ class DatabaseManager
             $statement =  "INSERT INTO " . $tableName . " ( " . $attribute .
                 ") VALUES (" . $value . ")";
             try {
-                $query = $this->pdoConnection->prepare($statement);
+               $query = $this->pdoConnection->prepare($statement);
                 $query->execute();
-                echo "Inserted into table successfully";
+                $last_id = $this->pdoConnection->lastInsertId();
+                return $last_id;
             } catch (\PDOException $e) {
                 throw new \Exception($e);
             }
