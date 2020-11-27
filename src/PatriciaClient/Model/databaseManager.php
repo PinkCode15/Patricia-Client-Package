@@ -69,16 +69,16 @@ class DatabaseManager
         }
     }
 
-     /**
-     * inserts into table if the table  exists
-     * @return String
+    /**
+     * select from table based on id if the table  exists
+     * @return Array
      */
     public function selectById(String $tableName, int $id)
     {
         if ($this->checkTable($tableName)) {
             try {
-                $statement =  "SELECT * FROM  " . $tableName ." WHERE id=? LIMIT 1";
-               $query = $this->pdoConnection->prepare($statement);
+                $statement =  "SELECT * FROM  " . $tableName . " WHERE id=? LIMIT 1";
+                $query = $this->pdoConnection->prepare($statement);
                 $query->execute([$id]);
                 return $query->fetch(\PDO::FETCH_ASSOC);
             } catch (\PDOException $e) {
@@ -87,9 +87,39 @@ class DatabaseManager
         }
     }
 
-         /**
-     * inserts into table if the table  exists
-     * @return String
+    /**
+     * select from table based on id if the table  exists
+     * @return Array
+     */
+    public function selectByColumn(String $tableName, String $column, String $value, $limit = null)
+    {
+        if ($this->checkTable($tableName)) {
+            try {
+                if($limit)
+                {
+                    $statement =  "SELECT * FROM  " . $tableName . " WHERE ".$column."=? Limit $limit";
+                    $query = $this->pdoConnection->prepare($statement);
+                    $query->execute([$value]);
+                    return $query->fetch(\PDO::FETCH_ASSOC);
+                }
+                else 
+                {
+                    $statement =  "SELECT * FROM  " . $tableName . " WHERE ".$column."=? ";
+                    $query = $this->pdoConnection->prepare($statement);
+                    $query->execute([$value]);
+                    return $query->fetchAll(\PDO::FETCH_ASSOC);
+
+                }
+            } catch (\PDOException $e) {
+                throw new \Exception($e);
+            }
+        }
+    }
+
+
+    /**
+     * inserts into table if the table  exists return the lastInsertId
+     * @return Int
      */
     public function insertIntoTable($tableName, $array)
     {
@@ -99,10 +129,58 @@ class DatabaseManager
             $statement =  "INSERT INTO " . $tableName . " ( " . $attribute .
                 ") VALUES (" . $value . ")";
             try {
-               $query = $this->pdoConnection->prepare($statement);
+                $query = $this->pdoConnection->prepare($statement);
                 $query->execute();
                 $last_id = $this->pdoConnection->lastInsertId();
                 return $last_id;
+            } catch (\PDOException $e) {
+                throw new \Exception($e);
+            }
+        }
+    }
+
+    /**
+     * update table by specific Column if the table  exists return the lastInsertId
+     * @return Int
+     */
+    public function updateTableByColumn(String $tableName, array $array)
+    {
+        if ($this->checkTable($tableName)) {
+            $column = array_key_last($array);
+            $attribute = array_keys($array);
+            array_pop($attribute);
+            $value = array_values($array);
+
+            $setStr = "";
+            foreach ($attribute as $key) {
+                $setStr .= $key . " = ?,";
+            }
+            $query = rtrim($setStr, ", ");
+
+            try {
+             return   $statement = "UPDATE " . $tableName . " SET " . $query . " WHERE " . $column . "= ? ";
+                $query = $this->pdoConnection->prepare($statement);
+                $query->execute($value);
+            } catch (\PDOException $e) {
+                throw new \Exception($e->getMessage());
+            }
+        }
+    }
+
+
+
+    /**
+     * delete record table if the table  exists 
+     * @return bool
+     */
+    public function deleteFromTable(String $tableName, String $column, String $id)
+    {
+        if ($this->checkTable($tableName)) {
+            try {
+                $statement =  "DELETE  FROM  " . $tableName . " WHERE " . $column . "=?";
+                $query = $this->pdoConnection->prepare($statement);
+                $query->execute([$id]);
+                return true;
             } catch (\PDOException $e) {
                 throw new \Exception($e);
             }
@@ -170,5 +248,4 @@ class DatabaseManager
     {
         return file_exists($this->getProjectRoot() . "/.env");
     }
-
 }
