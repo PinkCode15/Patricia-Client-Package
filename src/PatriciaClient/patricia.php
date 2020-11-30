@@ -71,7 +71,6 @@ class Patricia
         return $result ?  "Client deleted \n" : "Could not process request \n";
     }
 
-
     public static function delete_client_key(Int $id)
     {
         $result = DeleteQuery::deleteClientKeys('id', $id);
