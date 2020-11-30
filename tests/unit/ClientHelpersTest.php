@@ -14,11 +14,10 @@ class ClientHelpersTest extends TestCase
         ];
 
         $lastID = (new dbConnection())->insertIntoTable("clients", $clientData);
-        $client = (new dbConnection())->selectById("clients", $lastID);
 
         $clientKeysData = [
             "name" =>  "TestAdmin1",
-            "client_id" => $client['id'],
+            "client_id" => $lastID,
             "client_key" => 'pat_privkey_748jkvk099hjd',
             "is_blocked" => "0",
         ];
@@ -40,11 +39,10 @@ class ClientHelpersTest extends TestCase
         ];
 
         $lastID = (new dbConnection())->insertIntoTable("clients", $clientData);
-        $client = (new dbConnection())->selectById("clients", $lastID);
 
         $clientKeysData = [
             "name" =>  "TestAdmin2",
-            "client_id" => $client['id'],
+            "client_id" => $lastID,
             "client_key" => 'pat_privkey_mdlkfl7890',
             "is_blocked" => "0",
         ];
@@ -67,9 +65,8 @@ class ClientHelpersTest extends TestCase
         ];
 
         $lastID = (new dbConnection())->insertIntoTable("clients", $clientData);
-        $client = (new dbConnection())->selectById($table, $lastID);
 
-        $result = (new ClientHelpers())->getClient("id", $client['id']);
+        $result = (new ClientHelpers())->getClient("id", $lastID);
         $this->assertTrue(true);
         
     }

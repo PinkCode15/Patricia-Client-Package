@@ -54,6 +54,4 @@ class ClientHelpers
         $client = (new ReadQuery)->readClient($prop, $value);
         return $client;
     }
-
-    
 }
