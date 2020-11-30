@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use PatriciaClient\Model\DatabaseManager as dbConn;
+use PatriciaClient\Model\DatabaseManager as dbConn;;
 
 class MigrationTest extends TestCase 
 {

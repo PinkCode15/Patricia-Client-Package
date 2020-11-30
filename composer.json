@@ -4,10 +4,9 @@
     "type": "library",
     "license": "MIT",
     "scripts": {
-       "post-install-cmd": [
+        "post-install-cmd": [
             "PatriciaClient\\Actions\\sqlMigration::runMigration"
         ]
-       
     },
     "authors": [
         {
@@ -21,9 +20,12 @@
     ],
     "autoload": {
         "psr-4": {
-           "PatriciaClient\\":"src/PatriciaClient/"
-           }
+            "PatriciaClient\\": "src/PatriciaClient/"
         },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
     "require": {
         "vlucas/phpdotenv": "^5.2",
         "composer/composer": "^2.0"

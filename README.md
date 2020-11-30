@@ -94,6 +94,18 @@ $patricia = new Patricia();
     $patricia->delete_client_key(Int $clientKeyId);
 
 
+## `Helper functions`
+
+### `Check if user is admin`
+    is_admin(String $apiKey)
+
+### `Check if user is authenticated`
+    is_authenticated(String $apiKey)
+
+### `Get a client details`
+    get_client(String $prop, String $value)
+    `prop represents a column`
+    `value represents the value for query`
 
     
 ## License
