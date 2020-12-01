@@ -4,7 +4,8 @@ PHP library for Patricia Technologies for management of client and client key
  
 # Installation 
 ```sh
-composer install path goes here
+composer install pinkcode15/pat-client-package
+
 
 ```
 
