@@ -7,7 +7,7 @@ class CreateQuery {
  
     public static function createClient(array $attributes)
     {
-        $table = "clients";
+        $table = "auth_clients";
         $lastID = (new dbConnection())->insertIntoTable($table, $attributes);
         return (new dbConnection())->selectById($table, $lastID);
     }
@@ -15,7 +15,7 @@ class CreateQuery {
 
     public static function createClientKeys(array $attributes)
     {
-        $table = "client_keys";
+        $table = "auth_client_keys";
         $lastID = (new dbConnection())->insertIntoTable($table, $attributes);
         return (new dbConnection())->selectById($table, $lastID);
     }

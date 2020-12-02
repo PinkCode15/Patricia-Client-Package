@@ -14,7 +14,7 @@ class Seeders
             "type" => "admin",
             "is_blocked" => "0",
         ];
-        (new dbConnection())->insertIntoTable("clients", $data);
+        (new dbConnection())->insertIntoTable("auth_clients", $data);
     }
 
     function createClientKeysTableSeeder()
@@ -26,6 +26,6 @@ class Seeders
             "is_blocked" => "0",
         ];
 
-        (new dbConnection())->insertIntoTable("client_keys", $data);
+        (new dbConnection())->insertIntoTable("auth_client_keys", $data);
     }
 }

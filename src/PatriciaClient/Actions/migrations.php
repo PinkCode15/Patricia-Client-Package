@@ -18,7 +18,7 @@ class Migrations
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         ";
 
-        (new dbConnection())->upTable("clients", $attributes);
+        (new dbConnection())->upTable("auth_clients", $attributes);
     }
 
     function createClientKeysTable()
@@ -34,6 +34,6 @@ class Migrations
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         ";
 
-        (new dbConnection())->upTable("client_keys", $attributes);
+        (new dbConnection())->upTable("auth_client_keys", $attributes);
     }
 }

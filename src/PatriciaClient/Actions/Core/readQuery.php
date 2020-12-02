@@ -7,14 +7,14 @@ class ReadQuery {
  
     public static function readClient(String $prop, String $value)
     {
-        $table = "clients";
+        $table = "auth_clients";
         return (new dbConnection())->selectByColumn($table, $prop, $value,1);
     }
 
 
     public static function readClientKeys(String $prop, String $value, $limit=null)
     {
-        $table = "client_keys";
+        $table = "auth_client_keys";
         return (new dbConnection())->selectByColumn($table, $prop, $value, $limit);
     }
 }
