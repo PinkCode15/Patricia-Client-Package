@@ -1,6 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use PatriciaClient\Helpers\ClientHelpers;
+use PatriciaClient\Model\DatabaseManager as dbConnection;
 
 class ClientHelpersTest extends TestCase 
 {
