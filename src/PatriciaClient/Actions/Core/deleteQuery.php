@@ -7,8 +7,8 @@ class DeleteQuery {
  
     public static function deleteClient(String $prop, String $value)
     {
-        $table = "clients";
-        $key_table = "client_keys";
+        $table = "auth_clients";
+        $key_table = "auth_client_keys";
         $client =  (new dbConnection())->selectByColumn($table, $prop, $value,1); //get Client ID first;
         $clientID = $client['id'];
         if($clientID)
@@ -26,7 +26,7 @@ class DeleteQuery {
 
     public static function deleteClientKeys(String $prop, String $value)
     {
-        $table = "client_keys";
+        $table = "auth_client_keys";
         (new dbConnection())->deleteFromTable($table, $prop, $value);
         return true;
     }
