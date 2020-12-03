@@ -1,5 +1,5 @@
 {
-    "name": "stacey/pat-client-package",
+    "name": "stacey/patricia-client-package",
     "description": "This package enables easy setup for a client structure",
     "type": "library",
     "license": "MIT",
