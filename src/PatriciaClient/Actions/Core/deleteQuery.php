@@ -13,7 +13,7 @@ class DeleteQuery {
         $clientID = $client['id'];
         if($clientID)
         {
-            (new dbConnection())->deleteFromTable($key_table, 'client_id', $clientID);//Delete From Client Keys Table 
+            (new dbConnection())->deleteFromTable($key_table, 'auth_client_id', $clientID);//Delete From Client Keys Table 
             (new dbConnection())->deleteFromTable($table, $prop, $value);//Delete From Client Table 
             return true;
         }

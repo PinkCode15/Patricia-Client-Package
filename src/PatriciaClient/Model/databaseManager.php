@@ -44,7 +44,7 @@ class DatabaseManager
 
                 $query = $this->pdoConnection->prepare($statement);
                 $query->execute();
-                echo "Table created successfully";
+                // echo "Table created successfully";
             } catch (\PDOException $e) {
                 throw new \Exception($e);
             }

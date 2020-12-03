@@ -25,10 +25,10 @@ class CoreFunctionalityTest extends TestCase
             "is_blocked" => "0",
         ];
 
-        $clientId = (new dbConnection())->insertIntoTable("clients", $clientData);
+        $clientId = (new dbConnection())->insertIntoTable("auth_clients", $clientData);
 
         $clientKeyName = "MyOnlyKey";
-
+ 
         $result = (new patricia())->create_client_key($clientId, $clientKeyName);
         $this->assertTrue(true);
         $this->assertContains("MyOnlyKey", $result);
@@ -58,7 +58,7 @@ class CoreFunctionalityTest extends TestCase
             "is_blocked" => "0",
         ];
 
-        $clientId = (new dbConnection())->insertIntoTable("clients", $clientData);
+        $clientId = (new dbConnection())->insertIntoTable("auth_clients", $clientData);
 
         $clientKeyName = "MyOnlyKey";
 
@@ -73,7 +73,7 @@ class CoreFunctionalityTest extends TestCase
         $this->assertContains($result['id'], $response);
     }
 
-    public function testCanFetchCLient()
+    public function testCanFetchClient()
     {
         $clientName = "Harrys";
 
@@ -92,7 +92,7 @@ class CoreFunctionalityTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testCanFetchCLientKeys()
+    public function testCanFetchClientKeys()
     {
         $clientName = "Harrys";
 
@@ -121,7 +121,7 @@ class CoreFunctionalityTest extends TestCase
             "is_blocked" => "0",
         ];
 
-        $clientId = (new dbConnection())->insertIntoTable("clients", $clientData);
+        $clientId = (new dbConnection())->insertIntoTable("auth_clients", $clientData);
         $clientKeyName = "MyOnlyKey";
         $result = (new patricia())->create_client_key($clientId, $clientKeyName);
         $response = (new patricia())->delete_client_key($result['id']);

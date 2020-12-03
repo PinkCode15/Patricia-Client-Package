@@ -21,8 +21,8 @@ class Seeders
     {
         $data = [
             "name" =>  "DefaultAdmin",
-            "client_id" => "1",
-            "client_key" => $uuid = uniqid('pat_privkey_-',true),
+            "auth_client_id" => "1",
+            "client_key" => $uuid = uniqid('pat_privkey_',true),
             "is_blocked" => "0",
         ];
 

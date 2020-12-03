@@ -25,7 +25,7 @@ class Patricia
     {
         $data = [
             "name" =>  $clientName,
-            "client_id" => $clientId,
+            "auth_client_id" => $clientId,
             "client_key" => uniqid('pat_privkey_-', true),
             "is_blocked" => "0",
         ];
@@ -54,13 +54,13 @@ class Patricia
 
     public static function get_client_key(Int $id)
     {
-        $result = ReadQuery::readClientKeys('client_id', $id, 1);
+        $result = ReadQuery::readClientKeys('auth_client_id', $id, 1);
         return $result ?  $result  : "No record found for client_id: " . $id . " \n";
     }
 
     public static function get_client_keys(int $id)
     {
-        $result = ReadQuery::readClientKeys('client_id', $id);
+        $result = ReadQuery::readClientKeys('auth_client_id', $id);
         return $result ?  $result  : "No records found for client_id: " . $id . " \n";
     }
 

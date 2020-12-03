@@ -23,13 +23,13 @@ class Migrations
     }
 
     function createClientKeysTable()
-    {
+    { 
 
         $attributes = "
             id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
-            client_id INT(20) UNSIGNED NOT NULL,
-            FOREIGN KEY(client_id) REFERENCES clients(id) ,
+            auth_client_id INT(20) UNSIGNED NOT NULL,
+            FOREIGN KEY(auth_client_id) REFERENCES auth_clients(id) ,
             client_key VARCHAR(255) NOT NULL,
             is_blocked TINYINT(4) DEFAULT 1,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -14,16 +14,16 @@ class ClientHelpersTest extends TestCase
             "is_blocked" => "0",
         ];
 
-        $lastID = (new dbConnection())->insertIntoTable("clients", $clientData);
+        $lastID = (new dbConnection())->insertIntoTable("auth_clients", $clientData);
 
         $clientKeysData = [
             "name" =>  "TestAdmin1",
-            "client_id" => $lastID,
+            "auth_client_id" => $lastID,
             "client_key" => 'pat_privkey_748jkvk099hjd',
             "is_blocked" => "0",
         ];
 
-        (new dbConnection())->insertIntoTable("client_keys", $clientKeysData);
+        (new dbConnection())->insertIntoTable("auth_client_keys", $clientKeysData);
 
         $result = (new ClientHelpers())->isAdmin($clientKeysData['client_key']);
         $this->assertTrue(true);
@@ -39,16 +39,16 @@ class ClientHelpersTest extends TestCase
             "is_blocked" => "0",
         ];
 
-        $lastID = (new dbConnection())->insertIntoTable("clients", $clientData);
+        $lastID = (new dbConnection())->insertIntoTable("auth_clients", $clientData);
 
         $clientKeysData = [
             "name" =>  "TestAdmin2",
-            "client_id" => $lastID,
+            "auth_client_id" => $lastID,
             "client_key" => 'pat_privkey_mdlkfl7890',
             "is_blocked" => "0",
         ];
 
-        (new dbConnection())->insertIntoTable("client_keys", $clientKeysData);
+        (new dbConnection())->insertIntoTable("auth_client_keys", $clientKeysData);
 
         $result = (new ClientHelpers())->isAuthenticated($clientKeysData['client_key']);
         $this->assertTrue(true);
@@ -65,7 +65,7 @@ class ClientHelpersTest extends TestCase
             "is_blocked" => "0",
         ];
 
-        $lastID = (new dbConnection())->insertIntoTable("clients", $clientData);
+        $lastID = (new dbConnection())->insertIntoTable("auth_clients", $clientData);
 
         $result = (new ClientHelpers())->getClient("id", $lastID);
         $this->assertTrue(true);

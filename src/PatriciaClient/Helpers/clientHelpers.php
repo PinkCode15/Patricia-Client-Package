@@ -17,7 +17,7 @@ class ClientHelpers
             return "Key does not belong to any client";
         }
 
-        $client = (new ReadQuery)->readClient("id", $clientKey['client_id']);
+        $client = (new ReadQuery)->readClient("id", $clientKey['auth_client_id']);
 
         if (! $client){
             return "Client does not exist";
@@ -39,7 +39,7 @@ class ClientHelpers
             return "Key does not belong to any client";
         }
 
-        $client = (new ReadQuery)->readClient("id", $clientKey['client_id']);
+        $client = (new ReadQuery)->readClient("id", $clientKey['auth_client_id']);
 
         if($client){
             return true;
