@@ -1,6 +1,6 @@
 {
     "name": "stacey/patricia-client-package",
-    "description": "This package enables easy setup for a client structure",
+    "description": "This package enables easy setup for a client structure on patricia ",
     "type": "library",
     "license": "MIT",
     "scripts": {
