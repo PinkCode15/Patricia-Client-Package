@@ -1,4 +1,4 @@
-# Pat-Client-Package
+# Patricia-Client-Package
 PHP library for Patricia Technologies for management of client and client key 
 
  
