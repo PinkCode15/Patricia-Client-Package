@@ -114,4 +114,4 @@ $patricia = new Patricia();
 
 ## Contributions
    
-   Open to contributions from anyone, PR's can be made and would be accepted. Thanks
+   Open to contributions from anyone, PR's can be made and would be accepted. Thanks and good luck
