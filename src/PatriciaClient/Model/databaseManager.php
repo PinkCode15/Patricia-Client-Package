@@ -24,6 +24,7 @@ class DatabaseManager
                 $this->dbUser,
                 $this->dbPassword
             );
+            
             $this->createDataBase();
             $this->useDataBase();
             $this->createClientTable();
@@ -199,7 +200,7 @@ class DatabaseManager
         try {
             $query = $this->pdoConnection->prepare($statement);
             $result = $query->execute();
-            return true;
+            return  $result ? true : false;
         } catch (\PDOException $e) {
             return false;
         }
@@ -250,6 +251,7 @@ class DatabaseManager
 
                 $this->upTable("auth_clients", $attributes);
             } catch (\PDOException $e) {
+                throw new \Exception($e);
             }
         }
     }
