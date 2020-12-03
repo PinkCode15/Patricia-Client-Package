@@ -3,6 +3,11 @@
     "description": "This package enables easy setup for a client structure",
     "type": "library",
     "license": "MIT",
+    "scripts": {
+        "post-install-cmd": [
+            "PatriciaClient\\Actions\\sqlMigration::runMigration"
+        ]
+    },
     "authors": [
         {
             "name": "StaceyCreates",
@@ -11,11 +16,15 @@
     ],
     "autoload": {
         "psr-4": {
-           "PatriciaClient\\":"src/PatriciaClient/"
-           }
+            "PatriciaClient\\": "src/PatriciaClient/"
         },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
     "require": {
-        "vlucas/phpdotenv": "^5.2"
+        "vlucas/phpdotenv": "^5.2",
+        "composer/composer": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
