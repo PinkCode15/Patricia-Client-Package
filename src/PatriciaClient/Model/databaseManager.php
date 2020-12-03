@@ -235,7 +235,7 @@ class DatabaseManager
     // create a table if it does't exist
     private function createClientTable()
     {
-        if ($this->checkTable("auth_clients")) 
+        if (!$this->checkTable("auth_clients")) 
         {
             try{
                 $attributes = "
@@ -256,7 +256,7 @@ class DatabaseManager
 
     private function createClientKeysTable()
     { 
-        if ($this->checkTable("auth_client_keys")) 
+        if (!$this->checkTable("auth_client_keys")) 
         {
             try{
                 $attributes = "
