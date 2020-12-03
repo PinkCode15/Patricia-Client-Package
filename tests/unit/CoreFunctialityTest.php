@@ -10,8 +10,9 @@ class CoreFunctionalityTest extends TestCase
     public function testCanCreateClient()
     {
         $clientName = "Harrys";
+        $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName);
+        $result = (new patricia())->create_client($clientName, $clientRole);
         $this->assertTrue(true);
         $this->assertContains("Harrys", $result);
     }
@@ -76,8 +77,9 @@ class CoreFunctionalityTest extends TestCase
     public function testCanFetchClient()
     {
         $clientName = "Harrys";
+        $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName);
+        $result = (new patricia())->create_client($clientName, $clientRole);
         $response = (new patricia())->get_client('name', $clientName);
         $this->assertTrue(true);
         $this->assertContains($clientName, $response);
@@ -86,8 +88,9 @@ class CoreFunctionalityTest extends TestCase
     public function testCanFetchCLientKey()
     {
         $clientName = "Harrys";
+        $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName);
+        $result = (new patricia())->create_client($clientName, $clientRole);
         $response = (new patricia())->get_client_key($result['id']);
         $this->assertTrue(true);
     }
@@ -95,8 +98,9 @@ class CoreFunctionalityTest extends TestCase
     public function testCanFetchClientKeys()
     {
         $clientName = "Harrys";
+        $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName);
+        $result = (new patricia())->create_client($clientName, $clientRole);
         $response = (new patricia())->get_client_keys($result['id']);
         $this->assertTrue(true);
     }
@@ -104,8 +108,9 @@ class CoreFunctionalityTest extends TestCase
     public function testCanDeleteClient()
     {
         $clientName = "Harrys";
+        $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName);
+        $result = (new patricia())->create_client($clientName, $clientRole);
 
         $response = (new patricia())->delete_client($result['uuid']);
 

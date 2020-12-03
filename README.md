@@ -19,9 +19,11 @@ $patricia = new Patricia();
 
 ### `Create Client`
 
-      Patricia::create_client(String $clientName)  
+      Patricia::create_client(String $clientName, String $clientRole) 
       or
-      $patricia->create_client(String $clientName)
+      $patricia->create_client(String $clientName, String $clientRole)
+
+      clientRole is either `admin` or `user`
       
 
 ### `Create Client Key`

@@ -10,12 +10,12 @@ use PatriciaClient\Actions\Core\ReadQuery;
 class Patricia
 {
 
-    public static function create_client(String $name)
+    public static function create_client(String $name, String $role = 'admin')
     {
         $data = [
             "uuid" => uniqid('client-', true),
             "name" => $name,
-            "type" => "admin",
+            "type" => $role,
             "is_blocked" => "0",
         ];
         return CreateQuery::createClient($data);
