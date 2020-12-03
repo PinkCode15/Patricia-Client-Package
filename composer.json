@@ -8,10 +8,14 @@
             "PatriciaClient\\Actions\\sqlMigration::runMigration"
         ]
     },
-    "authors": [
+    "authors": [ 
         {
-            "name": "StaceyCreates",
+            "name": "PinkCode15",
             "email": "stacey@patricia.com.ng"
+        },
+        {
+            "name": "OctaconDeveloper",
+            "email": "jil@patricia.com.ng"
         }
     ],
     "autoload": {
