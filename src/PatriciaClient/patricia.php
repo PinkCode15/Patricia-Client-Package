@@ -26,7 +26,7 @@ class Patricia
         $data = [
             "name" =>  $clientName,
             "auth_client_id" => $clientId,
-            "client_key" => uniqid('pat_privkey_-', true),
+            "client_key" => uniqid('pat_privkey_', true),
             "is_blocked" => "0",
         ];
         return CreateQuery::createClientKeys($data);
