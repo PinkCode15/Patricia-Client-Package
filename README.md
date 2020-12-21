@@ -17,7 +17,13 @@ use PatriciaClient\Patricia;
 $patricia = new Patricia();
 ```
 
+```
+Run Patricia::migrate();
+to migrate your tables and default seeders
+```
+
 ### `Run Migration`
+    Run migration
     Patricia::migrate();
     or
     $patricia->migrate();
