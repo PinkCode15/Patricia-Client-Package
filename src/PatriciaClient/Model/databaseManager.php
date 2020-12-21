@@ -27,8 +27,8 @@ class DatabaseManager
             
             $this->createDataBase();
             $this->useDataBase();
-            $this->createClientTable();
-            $this->createClientKeysTable();
+            // $this->createClientTable();
+            // $this->createClientKeysTable();
 
             $this->pdoConnection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->pdoConnection->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
@@ -61,16 +61,15 @@ class DatabaseManager
      */
     public function downTable($tableName)
     {
-        if ($this->checkTable($tableName)) {
-            $statement =  "DROP TABLE " . $tableName;
-            try {
-                $query = $this->pdoConnection->prepare($statement);
-                $query->execute();
-                echo "Table dropped successfully";
-            } catch (\PDOException $e) {
-            }
+        $statement =  "DROP TABLE IF EXISTS  " . $tableName;
+        try {
+            $query = $this->pdoConnection->prepare($statement);
+            $query->execute();
+        } catch (\PDOException $e) {
+            throw new \Exception($e);
         }
     }
+    
 
     /**
      * select from table based on id if the table  exists
@@ -177,10 +176,10 @@ class DatabaseManager
     {
         if ($this->checkTable($tableName)) {
             try {
-                $statement =  "DELETE  FROM  " . $tableName;
+                $statement =  "TRUNCATE TABLE ". $tableName;
                 $query = $this->pdoConnection->prepare($statement);
                 $query->execute();
-                return true;
+                // return true;
             } catch (\PDOException $e) {
                 throw new \Exception($e);
             }
@@ -250,49 +249,7 @@ class DatabaseManager
         } catch (\PDOException $e) {
         }
     }
-    // create a table if it does't exist
-    private function createClientTable()
-    {
-        if (!$this->checkTable("auth_clients")) 
-        {
-            try{
-                $attributes = "
-                    id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    uuid VARCHAR(255) NOT NULL,
-                    name VARCHAR(100) NOT NULL,
-                    type ENUM ('admin', 'user') DEFAULT 'user',
-                    is_blocked TINYINT(4) DEFAULT 1,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                ";
 
-                $this->upTable("auth_clients", $attributes);
-            } catch (\PDOException $e) {
-                throw new \Exception($e);
-            }
-        }
-    }
-
-    private function createClientKeysTable()
-    { 
-        if (!$this->checkTable("auth_client_keys")) 
-        {
-            try{
-                $attributes = "
-                    id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    name VARCHAR(100) NOT NULL,
-                    auth_client_id INT(20) UNSIGNED NOT NULL,
-                    FOREIGN KEY(auth_client_id) REFERENCES auth_clients(id) ,
-                    client_key VARCHAR(255) NOT NULL,
-                    is_blocked TINYINT(4) DEFAULT 1,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                ";
-                $this->upTable("auth_client_keys", $attributes);
-            } catch (\PDOException $e) {
-            }
-        }
-    } 
 
     /**
      * gets the project root folder

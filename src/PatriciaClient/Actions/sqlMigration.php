@@ -10,21 +10,22 @@ class sqlMigration {
     { 
         (new migrator())->createClientTable();
         (new migrator())->createClientKeysTable();
-        (new seeding())->createClientTableSeeder();
-        (new seeding())->createClientKeysTableSeeder();
+        $id = (new seeding())->createClientTableSeeder();
+        var_dump($id);
+        (new seeding())->createClientKeysTableSeeder($id);
     }
 
     public static function downMigration()
     {
-        (new migrator())->dropClientTable();
         (new migrator())->dropClientKeysTable();
+        (new migrator())->dropClientTable();
 
     }
 
     public static function downSeeders()
     {
-        (new seeding())->deleteClientTable();
         (new seeding())->deleteClientKeysTable();
+        (new seeding())->deleteClientTable();
 
     }
 
