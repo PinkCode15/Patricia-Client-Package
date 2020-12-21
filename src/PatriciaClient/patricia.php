@@ -16,6 +16,18 @@ class Patricia
         return "migration successfull";
     }
 
+    public static function rollback_migrate()
+    {
+        sqlMigration::downMigration();
+        return "migration rollbacked";
+    }
+
+    public static function rollback_seeders()
+    {
+        sqlMigration::downSeeders();
+        return "seeders rollbacked";
+    }
+
     public static function create_client(String $name, String $role = 'admin')
     {
         $data = [

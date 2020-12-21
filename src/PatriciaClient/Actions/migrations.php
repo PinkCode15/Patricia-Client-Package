@@ -37,4 +37,14 @@ class Migrations
         ";
         (new dbConnection())->upTable("auth_client_keys", $attributes);
     }
+
+    function dropClientTable()
+    {
+        (new dbConnection())->downTable("auth_clients");
+    } 
+
+    function dropClientKeysTable()
+    {
+        (new dbConnection())->downTable("auth_client_keys");
+    }
 }

@@ -22,6 +22,17 @@ $patricia = new Patricia();
     or
     $patricia->migrate();
 
+
+### `Drop Table`
+    Patricia::rollback_migrate();
+     or
+    $patricia->rollback_migrate();
+
+### `Rollback Seeder`
+    Patricia::rollback_seeders();
+     or
+    $patricia->ollback_seeders();
+
 ### `Create Client`
 
       Patricia::create_client(String $clientName, String $clientRole) 

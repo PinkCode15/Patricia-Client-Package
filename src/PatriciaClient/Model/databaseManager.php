@@ -169,6 +169,23 @@ class DatabaseManager
             }
         }
     }
+    /**
+     * delete record table if the table  exists 
+     * @return bool
+     */
+    public function truncateTable(String $tableName)
+    {
+        if ($this->checkTable($tableName)) {
+            try {
+                $statement =  "DELETE  FROM  " . $tableName;
+                $query = $this->pdoConnection->prepare($statement);
+                $query->execute();
+                return true;
+            } catch (\PDOException $e) {
+                throw new \Exception($e);
+            }
+        }
+    }
 
 
 

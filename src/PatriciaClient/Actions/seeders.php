@@ -28,4 +28,15 @@ class Seeders
 
         (new dbConnection())->insertIntoTable("auth_client_keys", $data);
     }
+
+    function deleteClientTable()
+    {
+        (new dbConnection())->truncateTable("auth_clients");
+    }
+
+
+    function deleteClientKeysTable()
+    {
+        (new dbConnection())->truncateTable("auth_client_keys");
+    }
 }
