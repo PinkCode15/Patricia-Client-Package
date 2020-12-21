@@ -5,10 +5,16 @@ namespace PatriciaClient;
 use PatriciaClient\Actions\Core\CreateQuery;
 use PatriciaClient\Actions\Core\DeleteQuery;
 use PatriciaClient\Actions\Core\UpdateQuery;
-use PatriciaClient\Actions\Core\ReadQuery;
+use PatriciaClient\Actions\Core\ReadQuery; 
+use PatriciaClient\Actions\sqlMigration;
 
 class Patricia
 {
+    public static function migrate()
+    {
+        sqlMigration::runMigration();
+        return "migration successfull";
+    }
 
     public static function create_client(String $name, String $role = 'admin')
     {

@@ -17,6 +17,11 @@ use PatriciaClient\Patricia;
 $patricia = new Patricia();
 ```
 
+### `Run Migration`
+    Patricia::migrate();
+    or
+    $patricia->migrate();
+
 ### `Create Client`
 
       Patricia::create_client(String $clientName, String $clientRole) 
