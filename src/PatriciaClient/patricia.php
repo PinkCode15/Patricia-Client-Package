@@ -5,10 +5,28 @@ namespace PatriciaClient;
 use PatriciaClient\Actions\Core\CreateQuery;
 use PatriciaClient\Actions\Core\DeleteQuery;
 use PatriciaClient\Actions\Core\UpdateQuery;
-use PatriciaClient\Actions\Core\ReadQuery;
+use PatriciaClient\Actions\Core\ReadQuery; 
+use PatriciaClient\Actions\sqlMigration;
 
 class Patricia
 {
+    public static function migrate()
+    {
+        sqlMigration::runMigration();
+        return "migration successfull";
+    }
+
+    public static function rollback_migrate()
+    {
+        sqlMigration::downMigration();
+        return "migration rollbacked";
+    }
+
+    public static function rollback_seeders()
+    {
+        sqlMigration::downSeeders();
+        return "seeders rollbacked";
+    }
 
     /**
      * creates a new client record

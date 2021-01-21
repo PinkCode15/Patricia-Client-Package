@@ -17,6 +17,28 @@ use PatriciaClient\Patricia;
 $patricia = new Patricia();
 ```
 
+```
+Run Patricia::migrate();
+to migrate your tables and default seeders
+```
+
+### `Run Migration`
+    Run migration
+    Patricia::migrate();
+    or
+    $patricia->migrate();
+
+
+### `Drop Table`
+    Patricia::rollback_migrate();
+     or
+    $patricia->rollback_migrate();
+
+### `Rollback Seeder`
+    Patricia::rollback_seeders();
+     or
+    $patricia->ollback_seeders();
+
 ### `Create Client`
 
       Patricia::createClient(String $clientName, String $clientRole) 

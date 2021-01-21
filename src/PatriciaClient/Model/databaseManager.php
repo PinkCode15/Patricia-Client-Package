@@ -27,8 +27,8 @@ class DatabaseManager
             
             $this->createDataBase();
             $this->useDataBase();
-            $this->createClientTable();
-            $this->createClientKeysTable();
+            // $this->createClientTable();
+            // $this->createClientKeysTable();
 
             $this->pdoConnection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->pdoConnection->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
@@ -69,6 +69,7 @@ class DatabaseManager
             }
         }
     }
+    
 
     /**
      * select from table based on id if the table  exists
@@ -164,6 +165,23 @@ class DatabaseManager
                 $query->execute($value);
             } catch (\PDOException $e) {
                 throw new \Exception($e->getMessage());
+            }
+        }
+    }
+    /**
+     * delete record table if the table  exists 
+     * @return bool
+     */
+    public function truncateTable(String $tableName)
+    {
+        if ($this->checkTable($tableName)) {
+            try {
+                $statement =  "TRUNCATE TABLE ". $tableName;
+                $query = $this->pdoConnection->prepare($statement);
+                $query->execute();
+                // return true;
+            } catch (\PDOException $e) {
+                throw new \Exception($e);
             }
         }
     }

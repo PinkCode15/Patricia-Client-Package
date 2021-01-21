@@ -15,8 +15,23 @@ class sqlMigration {
         $composer = $event->getComposer();
         (new migrator())->createClientTable();
         (new migrator())->createClientKeysTable();
-        (new seeding())->createClientTableSeeder();
-        (new seeding())->createClientKeysTableSeeder();
+        $id = (new seeding())->createClientTableSeeder();
+        var_dump($id);
+        (new seeding())->createClientKeysTableSeeder($id);
+    }
+
+    public static function downMigration()
+    {
+        (new migrator())->dropClientKeysTable();
+        (new migrator())->dropClientTable();
+
+    }
+
+    public static function downSeeders()
+    {
+        (new seeding())->deleteClientKeysTable();
+        (new seeding())->deleteClientTable();
+
     }
 
 }
