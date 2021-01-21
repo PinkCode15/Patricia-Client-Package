@@ -7,8 +7,12 @@ use PatriciaClient\Actions\Seeders as seeding;
 class sqlMigration {
     public static function runMigration(Event $event)
     { 
-        $composer = $event->getComposer();
+        /**
+         * This class runs migrations and seeds data into the database
+         * @return null
+         */
 
+        $composer = $event->getComposer();
         (new migrator())->createClientTable();
         (new migrator())->createClientKeysTable();
         (new seeding())->createClientTableSeeder();

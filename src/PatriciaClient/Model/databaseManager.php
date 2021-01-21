@@ -37,7 +37,7 @@ class DatabaseManager
 
     /**
      * creates a new table if the table doesn't exists
-     * @return String
+     * @return null
      */
     public function upTable($tableName, $attribute)
     {
@@ -47,7 +47,6 @@ class DatabaseManager
 
                 $query = $this->pdoConnection->prepare($statement);
                 $query->execute();
-                // echo "Table created successfully";
             } catch (\PDOException $e) {
                 throw new \Exception($e);
             }
@@ -57,7 +56,7 @@ class DatabaseManager
 
     /**
      * drops a table if the table  exists
-     * @return String
+     * @return null
      */
     public function downTable($tableName)
     {
@@ -66,7 +65,6 @@ class DatabaseManager
             try {
                 $query = $this->pdoConnection->prepare($statement);
                 $query->execute();
-                echo "Table dropped successfully";
             } catch (\PDOException $e) {
             }
         }
@@ -74,9 +72,9 @@ class DatabaseManager
 
     /**
      * select from table based on id if the table  exists
-     * @return Array
+     * @return array
      */
-    public function selectById(String $tableName, int $id)
+    public function selectById(string $tableName, int $id)
     {
         if ($this->checkTable($tableName)) {
             try {
@@ -92,9 +90,9 @@ class DatabaseManager
 
     /**
      * select from table based on id if the table  exists
-     * @return Array
+     * @return array
      */
-    public function selectByColumn(String $tableName, String $column, String $value, $limit = null)
+    public function selectByColumn(string $tableName, string $column, string $value, $limit = null)
     {
         if ($this->checkTable($tableName)) {
             try {
@@ -124,7 +122,7 @@ class DatabaseManager
      * inserts into table if the table  exists return the lastInsertId
      * @return Int
      */
-    public function insertIntoTable($tableName, $array)
+    public function insertIntoTable(string $tableName, array $array)
     {
         if ($this->checkTable($tableName)) {
             $attribute = join(', ', array_keys($array));
@@ -143,17 +141,17 @@ class DatabaseManager
     }
 
     /**
-     * update table by specific Column if the table  exists return the lastInsertId
-     * @return Int
+     * update table by specific Column if the table  exists
+     * @return null
      */
-    public function updateTableByColumn(String $tableName, array $array)
+    public function updateTableByColumn(string $tableName, array $array)
     {
         if ($this->checkTable($tableName)) {
             $column = array_key_last($array);
             $attribute = array_keys($array);
             array_pop($attribute);
             $value = array_values($array);
-
+ 
             $setStr = "";
             foreach ($attribute as $key) {
                 $setStr .= $key . " = ?,";
@@ -161,7 +159,7 @@ class DatabaseManager
             $query = rtrim($setStr, ", ");
 
             try {
-             return   $statement = "UPDATE " . $tableName . " SET " . $query . " WHERE " . $column . "= ? ";
+                $statement = "UPDATE " . $tableName . " SET " . $query . " WHERE " . $column . "= ? ";
                 $query = $this->pdoConnection->prepare($statement);
                 $query->execute($value);
             } catch (\PDOException $e) {
@@ -176,7 +174,7 @@ class DatabaseManager
      * delete record table if the table  exists 
      * @return bool
      */
-    public function deleteFromTable(String $tableName, String $column, String $id)
+    public function deleteFromTable(string $tableName, string $column, string $id)
     {
         if ($this->checkTable($tableName)) {
             try {
@@ -192,9 +190,9 @@ class DatabaseManager
 
     /**
      * checks if a table  exists
-     * @return boolean
+     * @return bool
      */
-    private function checkTable($tableName)
+    private function checkTable(string $tableName)
     {
         $statement = "select * from " . $tableName;
         try {
@@ -220,8 +218,9 @@ class DatabaseManager
         }
     }
 
+
     /**
-     * creates a database 
+     * creates a database if it doesn't exists
      * @return null
      */
     private function createDataBase()
@@ -233,7 +232,12 @@ class DatabaseManager
         } catch (\PDOException $e) {
         }
     }
-    // create a table if it does't exist
+
+
+    /**
+     * Create a client table if it doesn't exists
+     * @return null
+     */
     private function createClientTable()
     {
         if (!$this->checkTable("auth_clients")) 
@@ -256,6 +260,10 @@ class DatabaseManager
         }
     }
 
+     /**
+     * creates a client key table if it doesn't exists
+     * @return null
+     */
     private function createClientKeysTable()
     { 
         if (!$this->checkTable("auth_client_keys")) 

@@ -6,6 +6,11 @@ use PatriciaClient\Model\databaseManager as dbConnection;
 class Seeders
 {
 
+
+     /**
+     * seeds data into for the client table
+     * @return null
+     */
     function createClientTableSeeder()
     {
         $data = [
@@ -17,6 +22,11 @@ class Seeders
         (new dbConnection())->insertIntoTable("auth_clients", $data);
     }
 
+
+     /**
+     * seeds data into for the client key table
+     * @return null
+     */
     function createClientKeysTableSeeder()
     {
         $data = [

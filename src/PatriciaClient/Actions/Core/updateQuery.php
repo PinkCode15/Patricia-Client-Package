@@ -3,9 +3,15 @@
 namespace PatriciaClient\Actions\Core;
 use PatriciaClient\Model\databaseManager as dbConnection;
 
-class UpdateQuery {
+class UpdateQuery 
+{
+
+    /**
+     * updates a client record
+     * @return array
+     */
  
-    public static function updateClient(Array $array)
+    public static function updateClient(array $array)
     {
         $lastKey = array_key_last($array);
         $table = "auth_clients";
@@ -13,7 +19,12 @@ class UpdateQuery {
         return (new dbConnection())->selectByColumn($table, $lastKey, $array[$lastKey],1);
     }
     
-    public static function updateClientKeys(Array $array)
+
+    /**
+     * creates a client key record(s)
+     * @return array
+     */
+    public static function updateClientKeys(array $array)
     {
         $table = "auth_client_keys";
         $lastKey = array_key_last($array);

@@ -7,6 +7,11 @@ use PatriciaClient\Model\databaseManager as dbConnection;
 class Migrations
 {
 
+    /**
+     * runs migration for the client table
+     * @return null
+     */
+
     function createClientTable()
     {
         $attributes = "
@@ -21,6 +26,12 @@ class Migrations
 
         (new dbConnection())->upTable("auth_clients", $attributes);
     }
+
+
+     /**
+     * runs migration for the client keys table
+     * @return null
+     */
 
     function createClientKeysTable()
     { 

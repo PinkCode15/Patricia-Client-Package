@@ -3,36 +3,52 @@
 use PatriciaClient\Helpers\ClientHelpers as clientHelper;
 
 
-if (!function_exists('is_admin')) {
-    function is_admin(String $apiKey)
-    {
-        if($apiKey)
-        {
-            return (new clientHelper())->isAdmin($apiKey);
-        }
-        return false;
-    }
-}
+ 
+    /**
+     * check if user is an admin
+     * @return array|bool
+     */
 
-if (!function_exists('get_client')) {
-    function get_client(String $prop, String $value)
-    {
-        if($prop && $value)
+    if (!function_exists('isAdmin')) {
+        function isAdmin(string $apiKey)
         {
-            return (new clientHelper())->getClient($prop, $value);
+            if($apiKey)
+            {
+                return (new clientHelper())->isAdmin($apiKey);
+            }
+            return false;
         }
-        return false;
     }
-}
 
-if (!function_exists('is_authenticated')) {
-    function is_authenticated(String $apiKey)
-    {
-        if($apiKey)
+
+    /**
+     * return a client details
+     * @return array|false
+     */
+    if (!function_exists('getClient')) {
+        function getClient(string $prop, string $value)
         {
-            return (new clientHelper())->isAuthenticated($apiKey);
+            if($prop && $value)
+            {
+                return (new clientHelper())->getClient($prop, $value);
+            }
+            return false;
         }
-        return false;
     }
-}
+
+
+    /**
+     * check if user is an authenticated
+     * @return array|false
+     */
+    if (!function_exists('isAuthenticated')) {
+        function isAuthenticated(string $apiKey)
+        {
+            if($apiKey)
+            {
+                return (new clientHelper())->isAuthenticated($apiKey);
+            }
+            return false;
+        }
+    }
 

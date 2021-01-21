@@ -4,7 +4,12 @@ namespace PatriciaClient\Actions\Core;
 use PatriciaClient\Model\databaseManager as dbConnection;
 
 class CreateQuery {
- 
+
+     /**
+     * creates a client
+     * @return array
+     */
+
     public static function createClient(array $attributes)
     {
         $table = "auth_clients";
@@ -13,6 +18,10 @@ class CreateQuery {
     }
 
 
+    /**
+     * creates a client key(s)
+     * @return array
+     */
     public static function createClientKeys(array $attributes)
     {
         $table = "auth_client_keys";

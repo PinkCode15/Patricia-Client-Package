@@ -10,7 +10,12 @@ use PatriciaClient\Actions\Core\ReadQuery;
 class Patricia
 {
 
-    public static function create_client(String $name, String $role = 'admin')
+    /**
+     * creates a new client record
+     * @return array
+     */
+
+    public static function createClient(string $name, string $role = 'admin')
     {
         $data = [
             "uuid" => uniqid('client-', true),
@@ -21,7 +26,11 @@ class Patricia
         return CreateQuery::createClient($data);
     }
 
-    public static function create_client_key(int $clientId, String $clientName)
+     /**
+     * creates a new client key record
+     * @return array
+     */
+    public static function createClientKey(int $clientId, string $clientName)
     {
         $data = [
             "name" =>  $clientName,
@@ -32,48 +41,88 @@ class Patricia
         return CreateQuery::createClientKeys($data);
     }
 
-    public static function update_client(string $uuid, array $array)
+
+     /**
+     * updates a client record
+     * @return array
+     */
+    public static function updateClient(string $uuid, array $array) 
     {
         $array['uuid'] = $uuid;
         $result = UpdateQuery::updateClient($array);
         return $result ?  $result  : "No record found for uuid: " . $uuid . " \n";
     }
 
-    public static function update_client_keys(Int $id, array $array)
+
+    /**
+     * updates a client record
+     * @return array
+     */
+    public static function updateClientKeys(int $id, array $array)
     {
         $array['id'] = $id;
         $result = UpdateQuery::updateClientKeys($array);
         return $result ?  $result  : "No record found for id: " . $id . " \n";
     }
-
-    public static function get_client(string $prop, string $value)
+    
+ 
+    /**
+     * gets a client record
+     * @return array
+     */
+    public static function getClient(string $prop, string $value)
     {
         $result = ReadQuery::readClient($prop, $value, 1);
         return $result ?  $result  : "No record found for " . $prop . ": " . $value . " \n";
     }
 
-    public static function get_client_key(Int $id)
+
+     
+    /**
+     * gets a client key record
+     * @return array
+     */
+    public static function getClientKey(int $id)
     {
         $result = ReadQuery::readClientKeys('auth_client_id', $id, 1);
         return $result ?  $result  : "No record found for client_id: " . $id . " \n";
     }
 
-    public static function get_client_keys(int $id)
+     
+    /**
+     * gets a client keys record
+     * @return array
+     */
+    public static function getClientKeys(int $id)
     {
         $result = ReadQuery::readClientKeys('auth_client_id', $id);
         return $result ?  $result  : "No records found for client_id: " . $id . " \n";
     }
 
 
-    public static function delete_client(String $uuid)
+     
+    /**
+     * deletes a client record
+     * @return array
+     */
+
+    public static function deleteClient(string $uuid)
     {
         $result =  DeleteQuery::deleteClient('uuid', $uuid);
         return $result ?  "Client deleted \n" : "Could not process request \n";
     }
 
-    public static function delete_client_key(Int $id)
+     
+    /**
+     * deletes a client key record
+     * @return array
+     */
+
+    public static function deleteClientKey(int $id)
     {
         $result = DeleteQuery::deleteClientKeys('id', $id);
         return $result ?  "Client key deleted \n" : "Could not process request \n";
     }
-}
+
+    
+} 

@@ -12,7 +12,7 @@ class CoreFunctionalityTest extends TestCase
         $clientName = "Harrys";
         $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName, $clientRole);
+        $result = (new patricia())->createClient($clientName, $clientRole);
         $this->assertTrue(true);
         $this->assertContains("Harrys", $result);
     }
@@ -30,7 +30,7 @@ class CoreFunctionalityTest extends TestCase
 
         $clientKeyName = "MyOnlyKey";
  
-        $result = (new patricia())->create_client_key($clientId, $clientKeyName);
+        $result = (new patricia())->createClientKey($clientId, $clientKeyName);
         $this->assertTrue(true);
         $this->assertContains("MyOnlyKey", $result);
     }
@@ -39,13 +39,13 @@ class CoreFunctionalityTest extends TestCase
     {
         $clientName = "Harrys";
 
-        $result = (new patricia())->create_client($clientName);
+        $result = (new patricia())->createClient($clientName);
 
         $newArray = [
             "is_blocked" => 1
         ];
 
-        $response = (new patricia())->update_client($result['uuid'], $newArray);
+        $response = (new patricia())->updateClient($result['uuid'], $newArray);
         $this->assertTrue(true);
         $this->assertContains($result['uuid'], $response);
     }
@@ -63,13 +63,13 @@ class CoreFunctionalityTest extends TestCase
 
         $clientKeyName = "MyOnlyKey";
 
-        $result = (new patricia())->create_client_key($clientId, $clientKeyName);
+        $result = (new patricia())->createClientKey($clientId, $clientKeyName);
 
         $newArray = [
             "is_blocked" => 1
         ];
 
-        $response = (new patricia())->update_client_keys($result['id'], $newArray);
+        $response = (new patricia())->updateClientKeys($result['id'], $newArray);
         $this->assertTrue(true);
         $this->assertContains($result['id'], $response);
     }
@@ -79,19 +79,19 @@ class CoreFunctionalityTest extends TestCase
         $clientName = "Harrys";
         $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName, $clientRole);
-        $response = (new patricia())->get_client('name', $clientName);
+        $result = (new patricia())->createClient($clientName, $clientRole);
+        $response = (new patricia())->getClient('name', $clientName);
         $this->assertTrue(true);
         $this->assertContains($clientName, $response);
     }
 
-    public function testCanFetchCLientKey()
+    public function testCanFetchClientKey()
     {
         $clientName = "Harrys";
         $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName, $clientRole);
-        $response = (new patricia())->get_client_key($result['id']);
+        $result = (new patricia())->createClient($clientName, $clientRole);
+        $response = (new patricia())->getClientKey($result['id']);
         $this->assertTrue(true);
     }
 
@@ -100,8 +100,8 @@ class CoreFunctionalityTest extends TestCase
         $clientName = "Harrys";
         $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName, $clientRole);
-        $response = (new patricia())->get_client_keys($result['id']);
+        $result = (new patricia())->createClient($clientName, $clientRole);
+        $response = (new patricia())->getClientKeys($result['id']);
         $this->assertTrue(true);
     }
 
@@ -110,9 +110,9 @@ class CoreFunctionalityTest extends TestCase
         $clientName = "Harrys";
         $clientRole = "admin";
 
-        $result = (new patricia())->create_client($clientName, $clientRole);
+        $result = (new patricia())->createClient($clientName, $clientRole);
 
-        $response = (new patricia())->delete_client($result['uuid']);
+        $response = (new patricia())->deleteClient($result['uuid']);
 
         $this->assertTrue(true);
     }
@@ -128,8 +128,8 @@ class CoreFunctionalityTest extends TestCase
 
         $clientId = (new dbConnection())->insertIntoTable("auth_clients", $clientData);
         $clientKeyName = "MyOnlyKey";
-        $result = (new patricia())->create_client_key($clientId, $clientKeyName);
-        $response = (new patricia())->delete_client_key($result['id']);
+        $result = (new patricia())->createClientKey($clientId, $clientKeyName);
+        $response = (new patricia())->deleteClientKey($result['id']);
         $this->assertTrue(true);
     }
 

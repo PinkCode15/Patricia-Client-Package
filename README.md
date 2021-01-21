@@ -19,21 +19,21 @@ $patricia = new Patricia();
 
 ### `Create Client`
 
-      Patricia::create_client(String $clientName, String $clientRole) 
+      Patricia::createClient(String $clientName, String $clientRole) 
       or
-      $patricia->create_client(String $clientName, String $clientRole)
+      $patricia->createClient(String $clientName, String $clientRole)
 
       clientRole is either `admin` or `user`
       
 
 ### `Create Client Key`
 
-    Patricia::create_client_key(int $clientId, String $clientKeyName);
-    $patricia->create_client_key(int $clientId, String $clientKeyName);
+    Patricia::createClientKey(int $clientId, String $clientKeyName);
+    $patricia->createClientKey(int $clientId, String $clientKeyName);
      
 ### `Update Client`
-    Patricia::update_client(string $ClientUuid, array $array);
-    $patricia->update_client(string $ClientUuid, array $array);
+    Patricia::updateClient(string $ClientUuid, array $array);
+    $patricia->updateClient(string $ClientUuid, array $array);
 
     $array should contain the columns and respective values;
     example $array = [
@@ -44,8 +44,8 @@ $patricia = new Patricia();
  
 ### `Update Client Keys`
 
-    Patricia::update_client_keys(Int $clientKeyId, array $array);
-    $patricia->update_client_keys(Int $clientKeyId, array $array);
+    Patricia::updateClientKeys(Int $clientKeyId, array $array);
+    $patricia->updateClientKeys(Int $clientKeyId, array $array);
 
     $array should contain the columns and respective values;
     example $array = [
@@ -58,8 +58,8 @@ $patricia = new Patricia();
 
     get a client details based on column attribute
 
-    Patricia::get_client(string $columnName, string $columnValue);
-    $patricia->get_client(string $columnName, string $columnValue);
+    Patricia::getClient(string $columnName, string $columnValue);
+    $patricia->getClient(string $columnName, string $columnValue);
 
     $array should contain the columns and respective values;
     example $array = [
@@ -71,41 +71,41 @@ $patricia = new Patricia();
 
     returns all instances of a client key
 
-    Patricia::get_client_keys(Int $clientKeyId);
-    $patricia->get_client_keys(Int $clientKeyId);
+    Patricia::getClientKeys(Int $clientKeyId);
+    $patricia->getClientKeys(Int $clientKeyId);
 
 
 ### `Get Client key Detail`
 
     returns the first instance of a client key
 
-    Patricia::get_client_key(Int $clientKeyId);
-    $patricia->get_client_key(Int $clientKeyId);
+    Patricia::getClientKey(Int $clientKeyId);
+    $patricia->getClientKey(Int $clientKeyId);
 
 
 ### `Delete client`
 
-    Patricia::delete_client(String $clientUuid);
-    $patricia->delete_client(String $clientUuid);
+    Patricia::deleteClient(String $clientUuid);
+    $patricia->deleteClient(String $clientUuid);
 
 
 
 ### `Delete client key`
 
-    Patricia::delete_client_key(Int $clientKeyId);
-    $patricia->delete_client_key(Int $clientKeyId);
+    Patricia::deleteClientKey(Int $clientKeyId);
+    $patricia->deleteClientKey(Int $clientKeyId);
 
 
 ## `Helper functions`
 
 ### `Check if user is admin`
-    is_admin(String $apiKey)
+    isAdmin(String $apiKey)
 
 ### `Check if user is authenticated`
-    is_authenticated(String $apiKey)
+    isAuthenticated(String $apiKey)
 
 ### `Get a client details`
-    get_client(String $prop, String $value)
+    getClient(String $prop, String $value)
     `prop represents a column`
     `value represents the value for query`
 
