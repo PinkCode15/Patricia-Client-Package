@@ -41,17 +41,17 @@ to migrate your tables and default seeders
 
 ### `Create Client`
 
-      Patricia::createClient(String $clientName, String $clientRole) 
+      Patricia::createClient(string $clientName, string $clientRole) 
       or
-      $patricia->createClient(String $clientName, String $clientRole)
+      $patricia->createClient(string $clientName, string $clientRole)
 
       clientRole is either `admin` or `user`
       
 
 ### `Create Client Key`
 
-    Patricia::createClientKey(int $clientId, String $clientKeyName);
-    $patricia->createClientKey(int $clientId, String $clientKeyName);
+    Patricia::createClientKey(int $clientId, string $clientKeyName);
+    $patricia->createClientKey(int $clientId, string $clientKeyName);
      
 ### `Update Client`
     Patricia::updateClient(string $ClientUuid, array $array);
@@ -66,8 +66,8 @@ to migrate your tables and default seeders
  
 ### `Update Client Keys`
 
-    Patricia::updateClientKeys(Int $clientKeyId, array $array);
-    $patricia->updateClientKeys(Int $clientKeyId, array $array);
+    Patricia::updateClientKeys(int $clientKeyId, array $array);
+    $patricia->updateClientKeys(int $clientKeyId, array $array);
 
     $array should contain the columns and respective values;
     example $array = [
@@ -93,41 +93,41 @@ to migrate your tables and default seeders
 
     returns all instances of a client key
 
-    Patricia::getClientKeys(Int $clientKeyId);
-    $patricia->getClientKeys(Int $clientKeyId);
+    Patricia::getClientKeys(int $clientKeyId);
+    $patricia->getClientKeys(int $clientKeyId);
 
 
 ### `Get Client key Detail`
 
     returns the first instance of a client key
 
-    Patricia::getClientKey(Int $clientKeyId);
-    $patricia->getClientKey(Int $clientKeyId);
+    Patricia::getClientKey(int $clientKeyId);
+    $patricia->getClientKey(int $clientKeyId);
 
 
 ### `Delete client`
 
-    Patricia::deleteClient(String $clientUuid);
-    $patricia->deleteClient(String $clientUuid);
+    Patricia::deleteClient(string $clientUuid);
+    $patricia->deleteClient(string $clientUuid);
 
 
 
 ### `Delete client key`
 
-    Patricia::deleteClientKey(Int $clientKeyId);
-    $patricia->deleteClientKey(Int $clientKeyId);
+    Patricia::deleteClientKey(int $clientKeyId);
+    $patricia->deleteClientKey(int $clientKeyId);
 
 
 ## `Helper functions`
 
 ### `Check if user is admin`
-    isAdmin(String $apiKey)
+    isAdmin(string $apiKey)
 
 ### `Check if user is authenticated`
-    isAuthenticated(String $apiKey)
+    isAuthenticated(string $apiKey)
 
 ### `Get a client details`
-    getClient(String $prop, String $value)
+    getClient(string $prop, string $value)
     `prop represents a column`
     `value represents the value for query`
 
