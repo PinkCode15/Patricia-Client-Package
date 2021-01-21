@@ -5,21 +5,21 @@ use Composer\Script\Event;
 use PatriciaClient\Actions\Migrations as migrator;
 use PatriciaClient\Actions\Seeders as seeding;
 class sqlMigration {
-    public static function runMigration(Event $event)
+
+    public static function runMigration()
     { 
         /**
          * This class runs migrations and seeds data into the database
          * @return null
          */
 
-        $composer = $event->getComposer();
+        // $composer = $event->getComposer();
         (new migrator())->createClientTable();
         (new migrator())->createClientKeysTable();
         $id = (new seeding())->createClientTableSeeder();
-        var_dump($id);
         (new seeding())->createClientKeysTableSeeder($id);
     }
-
+ 
     public static function downMigration()
     {
         (new migrator())->dropClientKeysTable();

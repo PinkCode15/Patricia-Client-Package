@@ -10,19 +10,32 @@ use PatriciaClient\Actions\sqlMigration;
 
 class Patricia
 {
+
+    /**
+     * run migration and seeders
+     * @return string
+     */
     public static function migrate()
     {
         sqlMigration::runMigration();
         return "migration successfull";
     }
 
-    public static function rollback_migrate()
+    /**
+     * roll back migartion
+     * @return string
+     */
+    public static function rollbackMigrate()
     {
         sqlMigration::downMigration();
         return "migration rollbacked";
     }
 
-    public static function rollback_seeders()
+    /**
+     * roll back seeders
+     * @return string
+     */
+    public static function rollbackSeeders()
     {
         sqlMigration::downSeeders();
         return "seeders rollbacked";
@@ -142,5 +155,5 @@ class Patricia
         return $result ?  "Client key deleted \n" : "Could not process request \n";
     }
 
-    
+
 } 

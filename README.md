@@ -30,14 +30,14 @@ to migrate your tables and default seeders
 
 
 ### `Drop Table`
-    Patricia::rollback_migrate();
+    Patricia::rollbackMigrate();
      or
-    $patricia->rollback_migrate();
+    $patricia->rollbackMigrate();
 
 ### `Rollback Seeder`
-    Patricia::rollback_seeders();
+    Patricia::rollbackSeeders();
      or
-    $patricia->ollback_seeders();
+    $patricia->rollbackSeeders();
 
 ### `Create Client`
 
